@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Luca Krist | KW Sports</title>
+  <style>
+    :root {
+      --bg: #f3f5f8;
+      --surface: #ffffff;
+      --ink: #0b0f14;
+      --muted: #5f6773;
+      --line: #d9e0ea;
+      --blue: #1146b8;
+      --blue-dark: #0d2f7a;
+      --blue-soft: #edf3ff;
+      --black: #0a0a0a;
+      --max: 1240px;
+      --shadow: 0 20px 50px rgba(9, 18, 34, 0.08);
+      --radius-xl: 32px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(17, 70, 184, 0.08), transparent 22%),
+        linear-gradient(180deg, #f6f8fb 0%, #eef2f7 100%);
+      line-height: 1.45;
+    }
+
+    img { display: block; max-width: 100%; }
+
+    a {
+      color: var(--blue-dark);
+      text-decoration: none;
+    }
+
+    a:hover { text-decoration: underline; }
+
+    .shell {
+      width: min(var(--max), calc(100% - 28px));
+      margin: 0 auto;
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: rgba(243, 245, 248, 0.92);
+      border-bottom: 1px solid rgba(11, 15, 20, 0.06);
+    }
+
+    .header-inner {
+      width: min(var(--max), calc(100% - 28px));
+      margin: 0 auto;
+      padding: 14px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand img {
+      height: 54px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .brand-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      text-transform: uppercase;
+    }
+
+    .brand-kicker,
+    .eyebrow,
+    .section-kicker,
+    .mini-label,
+    .table-head,
+    .source-index {
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .brand-kicker, .mini-label, .section-kicker, .table-head, .source-index { color: var(--muted); }
+
+    .brand-title {
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .header-tag {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: var(--black);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .page {
+      padding: 28px 0 52px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 28px;
+      padding: 30px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 8px;
+      background: linear-gradient(90deg, var(--black) 0%, var(--black) 42%, var(--blue) 100%);
+    }
+
+    .portrait-wrap {
+      position: relative;
+      min-height: 540px;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid #d6deea;
+      background:
+        linear-gradient(180deg, rgba(17, 70, 184, 0.16) 0%, rgba(17, 70, 184, 0.03) 34%, #ffffff 100%);
+    }
+
+    .portrait-wrap::after {
+      content: "";
+      position: absolute;
+      inset: auto -12% -34% -12%;
+      height: 64%;
+      background: radial-gradient(circle at center, rgba(17, 70, 184, 0.16), rgba(17, 70, 184, 0));
+      pointer-events: none;
+    }
+
+    .portrait {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center bottom;
+      padding: 16px 10px 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 13px;
+      border-radius: 999px;
+      background: var(--black);
+      color: #ffffff;
+    }
+
+    .eyebrow.alt {
+      background: var(--blue);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(44px, 7vw, 82px);
+      line-height: 0.92;
+      letter-spacing: -0.06em;
+      text-transform: uppercase;
+      max-width: 760px;
+    }
+
+    .hero-meta {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .summary {
+      margin-top: 18px;
+      padding: 20px 22px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, var(--black) 0%, #15243d 100%);
+      color: #ffffff;
+    }
+
+    .summary .mini-label { color: rgba(255,255,255,0.7); }
+
+    .summary p {
+      margin: 10px 0 0;
+      font-size: 17px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .stat-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 16px;
+    }
+
+    .stat-value {
+      margin-top: 8px;
+      font-size: 34px;
+      line-height: 0.98;
+      font-weight: 900;
+      letter-spacing: -0.05em;
+    }
+
+    .section-grid {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .section-card {
+      overflow: hidden;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .full {
+      margin-top: 22px;
+    }
+
+    .section-head {
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, #fafcff 0%, #f6f8fc 100%);
+    }
+
+    .section-title {
+      margin-top: 6px;
+      font-size: 24px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+    }
+
+    .section-body {
+      padding: 22px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .info-card {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
+      padding: 14px;
+    }
+
+    .info-card.wide {
+      grid-column: 1 / -1;
+    }
+
+    .info-value {
+      margin-top: 8px;
+      font-weight: 800;
+      font-size: 16px;
+    }
+
+    .bullets {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .bullets li + li {
+      margin-top: 10px;
+    }
+
+    .detail-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .detail-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .detail-key {
+      max-width: 60%;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .detail-value {
+      text-align: right;
+      font-weight: 800;
+    }
+
+    .video-meta {
+      display: grid;
+      grid-template-columns: 2.4fr 1fr 0.9fr;
+      gap: 16px;
+      align-items: start;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .video-meta:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .embed-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .embed-card {
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .embed-box {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      background: linear-gradient(135deg, rgba(17, 70, 184, 0.12), rgba(17, 70, 184, 0.03));
+    }
+
+    .embed-placeholder,
+    .embed-box iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .embed-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--muted);
+      padding: 20px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .embed-body {
+      padding: 16px;
+    }
+
+    .embed-title {
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .sources {
+      margin-top: 22px;
+      padding: 20px 22px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, #fff 0%, #f8fbff 100%);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .sources-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .source-item {
+      display: grid;
+      grid-template-columns: 26px 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .source-index {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: var(--black);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .footnote {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    sup {
+      font-size: 11px;
+      line-height: 0;
+      vertical-align: super;
+      font-weight: 900;
+    }
+
+    @media (max-width: 1080px) {
+      .hero,
+      .section-grid,
+      .stats-grid,
+      .info-grid,
+      .embed-grid,
+      .video-meta {
+        grid-template-columns: 1fr;
+      }
+
+      .portrait-wrap {
+        min-height: 420px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .shell,
+      .header-inner {
+        width: min(var(--max), calc(100% - 16px));
+      }
+
+      .hero,
+      .section-head,
+      .section-body,
+      .sources {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .hero {
+        padding-top: 20px;
+        padding-bottom: 20px;
+      }
+
+      .brand img {
+        height: 42px;
+      }
+
+      h1 {
+        font-size: 40px;
+      }
+
+      .hero-meta,
+      .summary p {
+        font-size: 15px;
+      }
+
+      .header-tag { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <div class="brand">
+        <img src="kwsports-logo.jpeg" alt="KW Sports Logo" />
+        <div class="brand-copy">
+          <div class="brand-kicker">KW Sports</div>
+          <div class="brand-title">Spieler CV</div>
+        </div>
+      </div>
+      <div class="header-tag">Luca Krist | Saison 25/26</div>
+    </div>
+  </header>
+
+  <main class="shell page">
+    <section class="hero">
+      <div class="portrait-wrap">
+        <img class="portrait" src="luca-krist.png" alt="Luca Krist" />
+      </div>
+
+      <div class="hero-content">
+        <div class="eyebrow-row">
+          <span class="eyebrow">KW Sports</span>
+          <span class="eyebrow alt">Spieler CV</span>
+        </div>
+
+        <h1>Luca Krist</h1>
+        <div class="hero-meta">Position: RM/RL &nbsp;&nbsp; Geburtsdatum: 16.3.2005</div>
+
+        <div class="summary">
+          <div class="mini-label">Kurzprofil</div>
+          <p>Vielseitiger Rückraumspieler mit ausgeprägter 1-gegen-1-Stärke zu beiden Seiten, insbesondere in Isolationssituationen. Zählt in der 2. HBL zu den Top 10 Feldtorschützen sowie zu den Top 20 Assistgebern. Defensiv flexibel einsetzbar auf den Positionen 2 und 3. Darüber hinaus hoher spielerischer Impact durch viele „Assist-to-Assist“-Aktionen und starkes Kreieren von Vorteilen für Mitspieler.</p>
+        </div>
+
+        <div class="stats-grid">
+          <article class="stat-card">
+            <div class="stat-label">Spiele 2.HBL Stand 17.04.2026</div>
+            <div class="stat-value">25</div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-label">Tore / Wurfquote</div>
+            <div class="stat-value">113 / 59%</div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-label">Assists</div>
+            <div class="stat-value">57 / 76</div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-label">Durchschnittlicher HPI</div>
+            <div class="stat-value">70</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-grid">
+      <article class="section-card">
+        <div class="section-head">
+          <div class="section-kicker">Profil</div>
+          <div class="section-title">Persönliche Daten</div>
+        </div>
+        <div class="section-body">
+          <div class="info-grid">
+            <div class="info-card">
+              <div class="mini-label">Spielername</div>
+              <div class="info-value">Luca Krist</div>
+            </div>
+            <div class="info-card">
+              <div class="mini-label">Position</div>
+              <div class="info-value">Rückraum Mitte / Links</div>
+            </div>
+            <div class="info-card">
+              <div class="mini-label">Geburtsdatum</div>
+              <div class="info-value">16.03.2005</div>
+            </div>
+            <div class="info-card">
+              <div class="mini-label">Größe</div>
+              <div class="info-value">192cm</div>
+            </div>
+            <div class="info-card wide">
+              <div class="mini-label">Bisherige Vereine</div>
+              <div class="info-value">TSV Bayer Dormagen (2. HBL), SC Magdeburg (Jugend)</div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="section-card">
+        <div class="section-head">
+          <div class="section-kicker">Scouting</div>
+          <div class="section-title">Stärken</div>
+        </div>
+        <div class="section-body">
+          <ul class="bullets">
+            <li>1-gegen-1 in Isolationssituationen</li>
+            <li>Deckung auf der 2 und 3</li>
+            <li>Tempospiel</li>
+            <li>Effizienz im Abschluss Durchbruch links / zentral</li>
+          </ul>
+        </div>
+      </article>
+    </section>
+
+    <section class="section-grid">
+      <article class="section-card">
+        <div class="section-head">
+          <div class="section-kicker">Output</div>
+          <div class="section-title">Effektivität und Effizienz</div>
+        </div>
+        <div class="section-body">
+          <div class="detail-list">
+            <div class="detail-row"><div class="detail-key">Tore pro Spiel</div><div class="detail-value">4,52 (6,6 in den letzten 5 Spielen)</div></div>
+            <div class="detail-row"><div class="detail-key">Assists pro Spiel</div><div class="detail-value">2,28<sup>1</sup> / 3,62<sup>2</sup></div></div>
+            <div class="detail-row"><div class="detail-key">Effizienz pro Angriff</div><div class="detail-value">53,61%<sup>2</sup></div></div>
+            <div class="detail-row"><div class="detail-key">Wurfquote Durchbruch</div><div class="detail-value">80%, 92% bei Durchbruch halb links<sup>2</sup></div></div>
+            <div class="detail-row"><div class="detail-key">Wurfquote Nah</div><div class="detail-value">42%<sup>2</sup></div></div>
+            <div class="detail-row"><div class="detail-key">Positive Aktionen</div><div class="detail-value">174 (113 Tore / 57 Assists / 2 Blocks / 2 Steals)</div></div>
+            <div class="detail-row"><div class="detail-key">Negative Aktionen</div><div class="detail-value">69 (61 TF / 8 2min)</div></div>
+            <div class="detail-row"><div class="detail-key">Effizienz-Verhältnis</div><div class="detail-value">2,52</div></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="section-card">
+        <div class="section-head">
+          <div class="section-kicker">Playmaking</div>
+          <div class="section-title">Playmaking</div>
+        </div>
+        <div class="section-body">
+          <div class="detail-list">
+            <div class="detail-row"><div class="detail-key">Assists</div><div class="detail-value">57<sup>1</sup> / 76<sup>2</sup></div></div>
+            <div class="detail-row"><div class="detail-key">Ballverluste / Turnover</div><div class="detail-value">61</div></div>
+            <div class="detail-row"><div class="detail-key">Assist-to-Turnover-Ratio</div><div class="detail-value">0,93<sup>1</sup> / 1,65<sup>2</sup></div></div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="section-card full">
+      <div class="section-head">
+        <div class="section-kicker">Media</div>
+        <div class="section-title">Video-Material</div>
+      </div>
+      <div class="section-body">
+        <div class="detail-list">
+          <div class="detail-row"><div class="detail-key">Teaser-Clip</div><div class="detail-value">[Link einfügen]</div></div>
+        </div>
+
+        <div class="embed-grid">
+          <article class="embed-card">
+            <div class="embed-box">
+              <div class="embed-placeholder">Teaser Clip hier als Embed einfügen</div>
+            </div>
+            <div class="embed-body">
+              <div class="embed-title">Teaser Clip</div>
+              <div class="footnote">Ersetze den Platzhalter im HTML durch einen YouTube- oder Vimeo-Embed.</div>
+            </div>
+          </article>
+
+          <article class="embed-card">
+            <div class="embed-box">
+              <div class="embed-placeholder">Optional zweiter Video Embed</div>
+            </div>
+            <div class="embed-body">
+              <div class="embed-title">Zusätzlicher Clip</div>
+              <div class="footnote">Optional für zweiten Clip oder spezielle Sequenz.</div>
+            </div>
+          </article>
+        </div>
+
+        <div style="height: 20px"></div>
+
+        <div class="table-head">Gegner / Wettbewerb</div>
+        <div class="video-meta">
+          <div>2.HBL: TSV Bayer Dormagen vs. SG BBM Bietigheim</div>
+          <div>11.04.2026</div>
+          <div>[Link]</div>
+        </div>
+        <div class="video-meta">
+          <div>2.HBL: HSG Krefeld vs. TSV Bayer Dormagen</div>
+          <div>28.03.2026</div>
+          <div>[Link]</div>
+        </div>
+        <div class="video-meta">
+          <div>2.HBL: TSV Bayer Dormagen vs. TV 05/07 Hüttenberg</div>
+          <div>13.03.2026</div>
+          <div>[Link]</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sources">
+      <div class="section-kicker">Quellen</div>
+      <div class="section-title" style="font-size: 22px; margin-top: 6px;">Datenbasis</div>
+      <div class="sources-list">
+        <div class="source-item">
+          <div class="source-index">1</div>
+          <div>Laut HBL-Statistik, Stand: 17.04.2026, nach 25 Spielen</div>
+        </div>
+        <div class="source-item">
+          <div class="source-index">2</div>
+          <div>Laut TSV Bayer Dormagen, Stand: 09.03.2026, nach 21 Spielen. Assists sind z.T. nicht gut dargestellt in HBL Statistik</div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
